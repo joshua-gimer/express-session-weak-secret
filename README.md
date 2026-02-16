@@ -222,6 +222,39 @@ app.use(session({
 
 MIT License — See [LICENSE](LICENSE) for details.
 
+## Security Notes
+
+### Thread Safety
+
+The Burp extension uses thread locks to prevent race conditions when:
+- Capturing cookies from multiple requests
+- Updating the UI during cracking
+
+### Python 2/3 Compatibility
+
+| Component | Python Version |
+|-----------|---------------|
+| Burp Extension (`express-session-weak-secret.py`) | Python 2.7 (Jython) |
+| CLI Tool (`crack-connect-sid.py`) | Python 3.x |
+
+The Burp extension uses Python 2 syntax for Jython compatibility.
+
+### Wordlist Security
+
+When using custom wordlists:
+- Paths are not validated (runs locally, not a web service)
+- Large wordlists may consume significant memory
+- Consider using the Java version for large wordlists (10x faster)
+
+### Best Practices
+
+1. **Get Authorization** — Only test systems you have permission to test
+2. **Document Findings** — Use the Export feature to create evidence
+3. **Report Responsibly** — Follow responsible disclosure practices
+4. **Suggest Fixes** — Include remediation guidance in reports
+
+---
+
 ## Disclaimer
 
 This tool is intended for authorized security testing only. Unauthorized access to computer systems is illegal. Always obtain proper authorization before testing.
